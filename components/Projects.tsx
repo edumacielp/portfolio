@@ -37,7 +37,6 @@ export function Projects() {
               highlights={project.highlights}
               stack={project.stack}
               link={project.link}
-              image={project.image}
               gradient={project.gradient}
               index={index}
             />
