@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   name: string;
-  tagline: string;
   description: string;
   highlights: string[];
   stack: string[];
@@ -15,7 +14,6 @@ interface ProjectCardProps {
 
 export function ProjectCard({ 
   name, 
-  tagline,
   description, 
   highlights,
   stack, 
@@ -69,9 +67,6 @@ export function ProjectCard({
                 <h3 className="text-2xl font-medium tracking-tight text-heading transition-colors group-hover:text-foreground md:text-2xl">
                   {name}
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  {tagline}
-                </p>
               </div>
               
               {/* Icon badge with hover effect */}

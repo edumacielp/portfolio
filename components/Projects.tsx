@@ -33,7 +33,6 @@ export function Projects() {
             <ProjectCard
               key={project.id}
               name={project.name}
-              tagline={project.tagline}
               description={project.description}
               highlights={project.highlights}
               stack={project.stack}
