@@ -17,10 +17,10 @@ export const projects = [
     description: "Founded and built Mediccae, a practice management platform for doctors. Handled everything technical: architecture, database design, frontend, backend, and Azure deployment. Designed it as multi-tenant from day one to scale properly.",
     highlights: [
       "Serving active practices with patient management, scheduling, and billing",
-      "Shipped MVP in 4 months working solo",
+      "Shipped MVP in 3 months working solo",
       "Zero downtime since launch"
     ],
-    stack: [".NET 10", "Blazor", "ASP.NET Core Web API", "PostgreSQL", "Azure"],
+    stack: [".NET 10", "Blazor", "ASP.NET Core Web API", "PostgreSQL", "Azure", "Generative A.I"],
     link: "https://www.mediccae.com.br",
     gradient: "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
   },
@@ -128,12 +128,9 @@ export const writings = [
           This isn't over-engineering. It's insurance. When I migrated Nanosoft from VB6, the clean boundaries made it possible to swap implementations while keeping the business logic intact.
         </p>
 
-        <h2>CQRS and MediatR</h2>
-        <p>
-          I use MediatR for command and query separation. Not because it's trendy, but because it enforces single responsibility. Each handler does one thing. Testing is straightforward. Debugging is easier.
-        </p>
-
-        <pre><code>{`public class CreatePatientCommand : IRequest<Guid>
+        <pre><code>
+          {`
+public class CreatePatientCommand : IRequest<Guid>
 {
     public string Name { get; set; }
     public string Email { get; set; }
@@ -142,7 +139,9 @@ export const writings = [
 public class CreatePatientHandler : IRequestHandler<CreatePatientCommand, Guid>
 {
     // Clean, testable, focused
-}`}</code></pre>
+}
+          `}
+        </code></pre>
 
         <h2>Don't go overboard</h2>
         <p>
@@ -186,7 +185,7 @@ public class CreatePatientHandler : IRequestHandler<CreatePatientCommand, Guid>
 
         <h2>How I structure my day</h2>
         <p>
-          Deep work in the morning! No meetings, no Slack. Just me, code, and problems that need solving.
+          Deep work in the morning! Coding and solving problems that require more attention.
         </p>
         <p>
           Afternoons are for collaboration—code reviews, planning, answering questions. By then, I've already shipped something meaningful.
