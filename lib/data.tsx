@@ -17,6 +17,7 @@ export const projects = [
     description: "Founded and built Mediccae, a practice management platform for doctors. Handled everything technical: architecture, database design, frontend, backend, and Azure deployment. Designed it as multi-tenant from day one to scale properly.",
     highlights: [
       "Serving active practices with patient management, scheduling, and billing",
+      "Made an AI workflow that turns patient conversations into structured clinical data - zero typing required!",
       "Shipped MVP in 3 months working solo",
       "Zero downtime since launch"
     ],
