@@ -3,7 +3,7 @@ import React from "react";
 export const profile = {
   name: "eduardo maciel",
   title: "a software engineer who builds with purpose",
-  bio: "experimenting with new technologies, enjoying music, or working out.",
+  bio: "experimenting with cutting-edge tech or composing and playing music.",
   linkedin: "https://www.linkedin.com/in/edumacielp",
   github: "https://github.com/edumacielp",
   email: "eduardomacielpereira@hotmail.com",
@@ -14,7 +14,7 @@ export const projects = [
   {
     id: "1",
     name: "MEDICCAE",
-    description: "Founded and built Mediccae, a practice management platform for doctors. Handled everything technical: architecture, database design, frontend, backend, and Azure deployment. Designed it as multi-tenant from day one to scale properly.",
+    description: "Founded and built Mediccae, a practice management platform for doctors. Handled everything technical: architecture, database design, backend, and Azure deployment. Designed it as multi-tenant from day one to scale properly.",
     highlights: [
       "Serving active practices with patient management, scheduling, and billing",
       "Made an AI workflow that turns patient conversations into structured clinical data - zero typing required!",
@@ -28,9 +28,9 @@ export const projects = [
   {
     id: "2",
     name: "NANOSOFT",
-    description: "Led the complete rewrite of a legacy VB6 business application to .NET 8 + Blazor. Migrated the entire system: database, business logic, and UI while keeping customers running. Built a new API layer and replaced Windows Forms with a modern Blazor interface.",
+    description: "Led the complete rewrite of a legacy VB6 business application to .NET 8. Migrated the entire system: database and business logic while keeping customers running. Built a new API layer and helped the team replace Windows Forms with a modern Blazor interface.",
     highlights: [
-      "Handles 30+ daily users and 5,000+ requests per day",
+      "Handles 40+ daily users and 5,000+ requests per day",
       "Performance improved significantly",
       "Bug reports dropped by 75%",
       "Team ships features 3x faster"

@@ -36,7 +36,7 @@ export function ProjectCard({
         className="block"
       >
         {/* Gradient border effect on hover */}
-        <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-br from-transparent via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        <div className="absolute -inset-px rounded-3xl bg-linear-to-br from-transparent via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{ 
             background: gradient ? `linear-gradient(135deg, ${gradient.split(',')[0].split('(')[1]} 0%, ${gradient.split(',')[1].split(')')[0]} 100%)` : undefined,
             filter: 'blur(8px)'
@@ -142,7 +142,7 @@ export function ProjectCard({
                 >
                   <span className="relative z-10">{tech}</span>
                   {/* Subtle hover effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 transition-opacity group-hover/tag:opacity-100" />
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent opacity-0 transition-opacity group-hover/tag:opacity-100" />
                 </motion.span>
               ))}
             </div>
