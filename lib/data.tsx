@@ -2,7 +2,6 @@ import React from "react";
 
 export const profile = {
   name: "eduardo maciel",
-  title: "a software engineer who builds with purpose",
   bio: "experimenting with cutting-edge tech or composing and playing music.",
   linkedin: "https://www.linkedin.com/in/edumacielp",
   github: "https://github.com/edumacielp",

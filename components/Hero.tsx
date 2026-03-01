@@ -43,9 +43,7 @@ export function Hero() {
           className="space-y-6 text-left text-base leading-relaxed text-muted-foreground md:text-lg"
         >
           <p>
-            I'm <span className="font-medium text-heading">{profile.name}</span>, {profile.title}. 
-            Currently working with scalable solutions in {" "}
-            <span className="font-medium text-[#2563EB]">.NET</span> ecosystem and modern cloud technologies.
+            I'm a software engineer with years of experience building high-performance, resilient systems in the {" "} <span className="font-medium text-[#2563EB]">.NET</span>  ecosystem. I specialize in back-end architecture, but I'm pragmatic enough to own the full stack when it matters.
           </p>
           
           <p>

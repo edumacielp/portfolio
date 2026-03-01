@@ -6,29 +6,31 @@ import { ProjectCard } from "@/components/ProjectCard";
 
 export function Projects() {
   return (
-    <section id="projects" className="px-6 py-20">
-      <div className="mx-auto max-w-6xl">
+    <section id="projects" className="px-5 py-24 sm:px-8">
+      <div className="mx-auto max-w-3xl">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-16 flex items-end justify-between border-b border-border pb-5"
         >
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mb-8 text-start text-2xl font-bold tracking-tight text-heading"
-          >
-            Featured Work
-          </motion.h1>
-          <p className="text-lg text-muted">
-            Building products that solve real problems
-          </p>
+          <div>
+            <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              Selected work
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+              Projects
+            </h2>
+          </div>
+          <span className="text-sm tabular-nums text-muted-foreground">
+            {projects.length.toString().padStart(2, "0")}
+          </span>
         </motion.div>
 
-        <div className="space-y-20">
+        {/* Project list */}
+        <div>
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -39,6 +41,7 @@ export function Projects() {
               link={project.link}
               gradient={project.gradient}
               index={index}
+              total={projects.length}
             />
           ))}
         </div>
