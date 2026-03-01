@@ -31,10 +31,10 @@ export const projects = [
     highlights: [
       "Handles 40+ daily users and 5,000+ requests per day",
       "Performance improved significantly",
-      "Bug reports dropped by 75%",
-      "Team ships features 3x faster"
+      "Team ships features 3x faster",
+      "Bug reports dropped",
     ],
-    stack: [".NET 8", "Blazor", "ASP.NET Core Web API", "SQL Server", "Azure", "VB6 to .NET"],
+    stack: [".NET 8", "Blazor", "ASP.NET Core Web API", "Microsoft SQL Server", "Azure", "VB6 to .NET"],
     link: "https://www.nanosoft.com.br",
     gradient: "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
   }

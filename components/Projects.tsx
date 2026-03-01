@@ -6,28 +6,41 @@ import { ProjectCard } from "@/components/ProjectCard";
 
 export function Projects() {
   return (
-    <section id="projects" className="px-5 py-24 sm:px-8">
-      <div className="mx-auto max-w-3xl">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+    <section id="projects" className="relative px-5 py-12 sm:px-8">
+      {/* Subtle background texture blob — purely decorative */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div className="absolute -right-32 top-16 h-96 w-96 rounded-full bg-linear-to-br from-teal-500/5 via-transparent to-transparent blur-3xl" />
+        <div className="absolute -left-32 bottom-16 h-80 w-80 rounded-full bg-linear-to-tr from-violet-500/4 via-transparent to-transparent blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl">
+        {/* Section header */}
+        <motion.header
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16 flex items-end justify-between border-b border-border pb-5"
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-16"
         >
-          <div>
-            <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-              Selected work
-            </p>
-            <h2 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+          {/* Eyebrow */}
+          <p className="mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
+            Selected work
+          </p>
+
+          {/* Heading row */}
+          <div className="flex items-baseline justify-between gap-4 border-b border-border pb-6">
+            <h2 className="text-4xl font-black tracking-tighter text-heading sm:text-5xl">
               Projects
             </h2>
+            {/* Project count, styled as a badge */}
+            <span className="shrink-0 rounded-full border border-border bg-card-muted px-3 py-1 font-mono text-xs font-semibold tabular-nums text-muted-foreground">
+              {projects.length.toString().padStart(2, "0")} total
+            </span>
           </div>
-          <span className="text-sm tabular-nums text-muted-foreground">
-            {projects.length.toString().padStart(2, "0")}
-          </span>
-        </motion.div>
+        </motion.header>
 
         {/* Project list */}
         <div>
@@ -44,6 +57,9 @@ export function Projects() {
               total={projects.length}
             />
           ))}
+
+          {/* Closing divider */}
+          <div className="h-px w-full bg-border" />
         </div>
       </div>
     </section>

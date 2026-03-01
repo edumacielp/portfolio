@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface ProjectCardProps {
   name: string;
@@ -22,116 +22,172 @@ export function ProjectCard({
   stack,
   link,
   index,
-  total,
   gradient,
 }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const isLast = index === total - 1;
 
-  // Parse a safe accent color from the gradient string (fallback: emerald)
-  const accentColor = gradient
-    ? gradient.split(",")[0].replace(/[^#\w]/g, "").slice(-7)
-    : "#10b981";
+  // Pull the first hex-ish color from gradient string, fallback to teal
+  const accentColor = (() => {
+    if (!gradient) return "#2dd4bf";
+    const match = gradient.match(/#[0-9a-fA-F]{3,6}/);
+    return match ? match[0] : "#2dd4bf";
+  })();
+
+  const num = (index + 1).toString().padStart(2, "0");
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className={`group ${!isLast ? "border-b border-border" : ""}`}
+      viewport={{ once: true, margin: "-48px" }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className="relative"
     >
-      {/* Main row — always visible */}
-      <div
-        className="flex cursor-pointer items-start gap-4 py-7 sm:gap-6"
+      {/* Animated left accent bar */}
+      <motion.div
+        className="absolute left-0 top-0 w-[3px] rounded-full"
+        style={{ backgroundColor: accentColor }}
+        initial={{ height: 0 }}
+        animate={{ height: expanded ? "100%" : "0%" }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      />
+
+      {/* Top divider */}
+      <div className="h-px w-full bg-border" />
+
+      {/* Clickable main row */}
+      <button
         onClick={() => setExpanded((v) => !v)}
+        className="group w-full cursor-pointer text-left"
+        aria-expanded={expanded}
+        aria-label={`Toggle details for ${name}`}
       >
-        {/* Index number */}
-        <span className="mt-0.5 w-6 shrink-0 text-[11px] font-medium tabular-nums text-muted-foreground/50 sm:w-8">
-          {(index + 1).toString().padStart(2, "0")}
-        </span>
-
-        {/* Name + description */}
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            {/* Animated accent dot */}
+        <div className="flex items-start gap-5 py-8 pl-5 pr-1 transition-all duration-200 sm:pl-6">
+          {/* Decorative large index number */}
+          <div
+            className="relative hidden shrink-0 select-none sm:block"
+            aria-hidden="true"
+          >
             <span
-              className="mt-0.5 h-2 w-2 shrink-0 rounded-full transition-transform duration-300 group-hover:scale-125"
-              style={{ backgroundColor: gradient ? accentColor : "#10b981" }}
-            />
-            <h3 className="text-base font-semibold tracking-tight text-heading transition-colors group-hover:text-foreground sm:text-lg">
-              {name}
-            </h3>
+              className="font-mono text-[4rem] font-black leading-none tracking-tighter opacity-[0.07] transition-opacity duration-300 group-hover:opacity-[0.12]"
+              style={{ color: accentColor }}
+            >
+              {num}
+            </span>
           </div>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground line-clamp-2 sm:line-clamp-none">
-            {description}
-          </p>
-        </div>
 
-        {/* Right side: link + expand */}
-        <div className="flex shrink-0 items-center gap-2 pt-0.5">
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-foreground/30 hover:text-foreground hover:shadow-sm"
-            aria-label={`Visit ${name}`}
-          >
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-          <motion.div
-            animate={{ rotate: expanded ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-            className="flex h-8 w-8 items-center justify-center text-muted-foreground/50"
-          >
-            <ChevronDown className="h-4 w-4" />
-          </motion.div>
-        </div>
-      </div>
+          {/* Content */}
+          <div className="min-w-0 flex-1">
+            {/* Mobile index */}
+            <span
+              className="mb-2 block font-mono text-[10px] font-bold tracking-[0.25em] sm:hidden"
+              style={{ color: accentColor }}
+            >
+              {num}
+            </span>
 
-      {/* Expandable detail panel */}
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <h3
+                  className="text-xl font-bold leading-tight tracking-tight text-heading transition-colors duration-200 group-hover:text-foreground sm:text-2xl"
+                  style={{
+                    // Subtle accent tint on hover via CSS custom property
+                  }}
+                >
+                  {name}
+                </h3>
+                <p className="mt-2 max-w-lg text-sm leading-relaxed text-muted-foreground">
+                  {description}
+                </p>
+              </div>
+
+              {/* External link */}
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Visit ${name}`}
+                className="group/link mt-0.5 flex shrink-0 items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground transition-all duration-200 hover:border-foreground/20 hover:text-foreground hover:shadow-sm"
+              >
+                <span className="hidden sm:inline">Visit</span>
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
+
+            {/* Collapsed state: tech pills (first 3 only) */}
+            <AnimatePresence>
+              {!expanded && (
+                <motion.div
+                  initial={false}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="mt-4 flex flex-wrap gap-1.5"
+                >
+                  {stack.slice(0, 4).map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-border bg-card-muted px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {stack.length > 4 && (
+                    <span className="px-1 py-0.5 text-[10px] text-muted-foreground/50">
+                      +{stack.length - 4}
+                    </span>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </button>
+
+      {/* Expandable panel */}
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            key="detail"
+            key="panel"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
             className="overflow-hidden"
           >
-            <div className="pb-8 pl-10 sm:pl-14">
-              {/* Highlights */}
-              <ul className="mb-5 space-y-2">
+            <div className="pb-10 pl-5 sm:pl-[calc(4rem+1.25rem+1.5rem)]">
+              {/* Numbered highlights */}
+              <div className="mb-6 space-y-3">
                 {highlights.map((item, i) => (
-                  <motion.li
+                  <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -8 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.25 }}
-                    className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                    transition={{ delay: i * 0.07, duration: 0.28 }}
+                    className="flex items-start gap-3"
                   >
                     <span
-                      className="mt-2 h-1 w-1 shrink-0 rounded-full"
-                      style={{
-                        backgroundColor: gradient ? accentColor : "#10b981",
-                      }}
-                    />
-                    {item}
-                  </motion.li>
+                      className="mt-0.5 shrink-0 font-mono text-[10px] font-bold tracking-widest"
+                      style={{ color: accentColor }}
+                    >
+                      {(i + 1).toString().padStart(2, "0")}
+                    </span>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {item}
+                    </p>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
 
-              {/* Stack chips */}
+              {/* Full stack chips */}
               <div className="flex flex-wrap gap-1.5">
                 {stack.map((tech, i) => (
                   <motion.span
                     key={tech}
-                    initial={{ opacity: 0, scale: 0.85 }}
+                    initial={{ opacity: 0, scale: 0.88 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.05 + i * 0.04, duration: 0.2 }}
-                    className="rounded-full border border-border bg-card-muted px-3 py-1 text-[11px] font-medium tracking-wide text-muted-foreground"
+                    transition={{ delay: 0.04 + i * 0.035, duration: 0.22 }}
+                    className="rounded-full border border-border bg-card-muted px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground transition-colors duration-150 hover:border-foreground/20 hover:text-foreground"
                   >
                     {tech}
                   </motion.span>
